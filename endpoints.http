@@ -1,0 +1,37 @@
+
+###
+
+GET http://localhost:3333/PontosDeColeta
+
+###
+
+GET http://localhost:3333/PontosDeColeta/aaa
+
+###
+
+POST http://localhost:3333/PontosDeColeta
+Content-Type: application/json
+
+{
+    "name": "praia lalalal",
+    "endereco": "rua sao jorge ",
+    "complemento": "casa 02",
+    "descricao": "o kok o ko ko k o"
+
+    
+}
+
+###
+
+PUT http://localhost:3333/users/999af5d0-3777-4e02-834d-9b582bc8de68
+Content-Type: application/json
+
+{
+    "name": "ORELHA",
+    "password": "123",
+    "profile": "ADM"
+}
+
+###
+
+DELETE http://localhost:3333/users/8cf1e65c-8c4a-4a74-b63b-dcc5ab1e0c12
