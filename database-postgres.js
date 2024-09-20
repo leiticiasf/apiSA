@@ -2,22 +2,36 @@ import { randomUUID } from "crypto";
 import { sql } from './db.js';
 
 export class DatabasePostgres { 
-
-  async createPontoDeColeta(PontoDeColeta) {
-    const artigoID = randomUUID();
-    // const artigoID = 1;
-    const { nome, descricao, conteudo, imagem, github } = artigo;
-
-    await sql`insert into artigos (id, nome, descricao, conteudo, imagem, github) 
-              values (${artigoID}, ${nome}, ${descricao}, ${conteudo}, ${imagem}, ${github})`;
+  async listPontoDeColeta() {
+    const pontoDeColeta = await sql`select * from pontoDeColeta`;
+    return pontoDeColeta;
   }
 
-  async updatePontoDeColeta(id, pontoDeColeta) {
-     
+
+  async createPonto(ponto) {
+    const id = randomUUID();
+    const { name, descricao, complemento, endereco  } = ponto;
+
+    await sql`insert into pontoDeColeta (id, name, endereco, descricao, complemento) 
+              values (${id}, ${name}, ${endereco}, ${descricao}, ${complemento})`;
   }
 
-  async deletePontoDeColeta(id) {
-     
+  async updatePonto(id, ponto) {
+    const { name, endereco, descricao, complemento } = ponto;
+
+    await sql`update pontoDeColeta set 
+    name = ${name},
+    endereco = ${endereco},
+    descricao = ${descricao},
+    complemento = ${complemento}
+    where id = ${id}
+`;
+
+  }
+
+  async deletePonto(id) {
+    await sql`delete from pontoDeColeta where id = ${id}`
+
   }
 
 }

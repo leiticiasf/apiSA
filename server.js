@@ -15,16 +15,34 @@ server.register(cors, {
 // ENDPOINTS (CRUD):
 
 // CREATE
+server.post('/pontoDeColeta', async (request, reply) => {
+    const body = request.body;
+    await databasePostgres.createPonto(body);
+    return reply.status(201).send();
+})
 
-
-
-// REATE
-
+// READE
+server.get('/pontoDeColeta', async () => {
+    const pontoDeColeta = await databasePostgres.listPontoDeColeta();
+    return pontoDeColeta;
+});
 
 // UPDATE
+server.put('/pontoDeColeta/:id', async (request, reply) => {
+    const pontoID = request.params.id;
+    const body = request.body;
+    await databasePostgres.updatePonto(pontoID, body);
 
+    return reply.status(204).send();
+})
 
 // DELETE
+server.delete('/pontoDeColeta/:id', async (request, reply) => {
+    const pontoID = request.params.id;
+    await databasePostgres.deletePonto(pontoID);
+
+    return reply.status(204).send();
+})
 
 
 server.listen({
