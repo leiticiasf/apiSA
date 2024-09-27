@@ -10,7 +10,7 @@ POST http://localhost:3333/pontoDeColeta
 Content-Type: application/json
 
 {
-    "name": "praia lalalal",
+    "name": "praia lalalfsdal",
     "endereco": "rua sao jorge ",
     "complemento": "casa 02",
     "descricao": "o kok o ko ko k o"

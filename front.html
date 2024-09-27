@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponto de Coleta</title>
+</head>
+<body>
+
+    <input type="text" name="" id="nome" placeholder="nome">
+    <input type="text" name="" id="endereco" placeholder="endereco">
+    <input type="text" name="" id="complemento" placeholder="complemento">
+    <input type="text" name="" id="descricao" placeholder="descricao">
+
+        <button onclick="criarPontos()">
+        CRIAR PONTO 
+    </button>
+    
+</body>
+</html>
+            <p id="pontos"></p>
+<script>
+    async function pegarPontos () { 
+    const resposta = await fetch('http://localhost:3333/pontoDeColeta', {
+        method: 'GET'
+    })
+    const pontoDeColeta = await resposta.json();
+    console.log(pontoDeColeta)
+
+    const elementoP = document.getElementById('pontos');
+    elementoP.innerHTML = pontoDeColeta[0].name;
+}
+pegarPontos();
+
+async function criarPontos(){
+        const nome = document.getElementById('nome').value;
+        const endereco = document.getElementById('endereco').value;
+        const complemento = document.getElementById('complemento').value;
+        const descricao = document.getElementById('descricao').value;
+
+        const novoPonto = {
+            "name": "praia lalalal",
+            "endereco": "rua sao jorge ",
+            "complemento": "casa 02",
+            "descricao": "o kok o ko ko k o"
+        }
+
+    const resposta = await fetch('http://localhost:3333/pontoDeColeta', {
+        method: 'POST',
+        headers: {
+                'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(novoPonto)
+    });
+      criarPontos();
+}
+</script>
