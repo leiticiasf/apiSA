@@ -17,8 +17,28 @@ server.register(cors, {
 // CREATE
 server.post('/pontoDeColeta', async (request, reply) => {
     const body = request.body;
-    await databasePostgres.createPonto(body);
-    return reply.status(201).send();
+        let error = {};
+        if(!body.name){
+            error.name = 'Valor name não foi informado.'
+    
+        } if (!body.endereco){
+            error.endereco = 'Valor endereço não foi informado.'
+        }
+     if (!body.complemento){
+        error.complemento = 'Valor complemento não foi informado.'
+         }
+         if (!body.descricao){
+    error.descricao = 'Valor descrição não foi informado.'
+        }
+
+    if(body.name && body.endereco){
+        await databasePostgres.createPonto(body);
+        return reply.status(201).send();
+
+    }else{
+        return reply.status(400).send(error);
+
+    }
 })
 
 // READE
@@ -31,9 +51,33 @@ server.get('/pontoDeColeta', async () => {
 server.put('/pontoDeColeta/:id', async (request, reply) => {
     const pontoID = request.params.id;
     const body = request.body;
-    await databasePostgres.updatePonto(pontoID, body);
+  
 
-    return reply.status(204).send();
+    let error = {};
+
+    if(!body.name){
+        error.name = 'Valor name não foi informado.'
+
+    } if (!body.endereco){
+        error.endereco = 'Valor endereço não foi informado.'
+    }
+    if (!body.complemento){
+    error.complemento = 'Valor complemento não foi informado.'
+     }
+     if (!pontoID){
+        error.complemento = 'Valor ID não foi informado.'
+         }
+     if (!body.descricao){
+error.descricao = 'Valor descrição não foi informado.'
+    }
+    if(body.name && body.endereco && pontoID){
+        await databasePostgres.updatePonto(pontoID, body);
+        return reply.status(201).send();
+
+    }else{
+        return reply.status(400).send(error);
+
+    }
 })
 
 // DELETE

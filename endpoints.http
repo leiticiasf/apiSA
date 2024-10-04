@@ -24,10 +24,10 @@ PUT http://localhost:3333/pontoDeColeta/ae14c592-c367-48d1-8e24-7f808b058c88
 Content-Type: application/json
 
 { 
-    "name": "dsad ladsadalalal",
-    "endereco": "weweee ",
-    "complemento": "gggggg",
-    "descricao": "wwwww"
+    "name": "dasdsad lalalfsdal",
+    "endereco": "rdadsada sao jorge ",
+    "complemento": "casasdsad 02",
+    "descricao": "o kok dasdao ko ko k o"
 }
 
 ###
