@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ponto de Coleta</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -15,20 +16,39 @@
         <button onclick="criarPontos()">
         CRIAR PONTO 
     </button>
+    <h2>Pontos Registrados</h2>
+    <button onclick="pegarPontos()">Ver Pontos</button>
+
+<table>
+  <tr>
+    <thead></thead>
+    <th>Praia</th>
+    <th>Endereço</th>
+    <th>Complemento</th>
+    <th>Descrição</th>
+  </tr>
+ <tbody id="tbody">
+    
+ </tbody>
+  
+
+</table>
+
     
 </body>
 </html>
-            <p id="pontos"></p>
+            
 <script>
     async function pegarPontos () { 
     const resposta = await fetch('http://localhost:3333/pontoDeColeta', {
         method: 'GET'
+        .then(function(response){
+            return response.json();
+        })
+        .then(func)
     })
-    const pontoDeColeta = await resposta.json();
-    console.log(pontoDeColeta)
-
-    const elementoP = document.getElementById('pontos');
-    elementoP.innerHTML = pontoDeColeta[0].name;
+ 
+    
 }
 pegarPontos();
 
@@ -38,13 +58,17 @@ async function criarPontos(){
         const complemento = document.getElementById('complemento').value;
         const descricao = document.getElementById('descricao').value;
 
-        const novoPonto = {
-            "name": "praia lalalal",
-            "endereco": "rua sao jorge ",
-            "complemento": "casa 02",
-            "descricao": "o kok o ko ko k o"
+        if(nome && endereco && complemento && descricao ){
+            const novoPonto = {
+            "name": nome,
+            "endereco":endereco,
+            "complemento":complemento,
+            "descricao": descricao
         }
 
+ 
+
+       
     const resposta = await fetch('http://localhost:3333/pontoDeColeta', {
         method: 'POST',
         headers: {
@@ -52,6 +76,10 @@ async function criarPontos(){
         },
         body: JSON.stringify(novoPonto)
     });
-      criarPontos();
+}       
+            else{
+                alert("Preencha todos os campos!")
+            }
+      
 }
 </script>
